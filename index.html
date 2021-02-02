@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+
+<script src="js/jquery.min.js"></script>
+
+    <script>
+    function set_validator_errors(){
+        orderValidator.errorTitle = 'Por favor corrige los siguientes errores'; 
+
+        orderValidator.errorNameField = 'Listo'; 
+        orderValidator.errorNameMess = 'Introduzca su nombre'; 
+        
+        orderValidator.errorPhoneField = 'Nombre'; 
+        orderValidator.errorPhoneMess = 'Ingrese el número de teléfono correcto'; 
+        
+        orderValidator.errorAddress = 'Ingrese la dirección correcta'; 
+        orderValidator.errorRequired = 'campo requerido'; 
+        orderValidator.errorMaxLength = 'carácter máximo válido {1}'; 
+        orderValidator.errorMinLength = 'carácter mínimo válido {1}'; 
+        orderValidator.errorEmailField = 'E-mail';
+        orderValidator.errorEmail = 'Correo electrónico no válido especificado';
+        }
+    </script>
+    
+<script>
+
+
+
+    
+    setOffer: function (offerId) {
+        if (offerId == this._setOfferId) {
+            return ;
+        }
+        this._setOfferId = offerId;
+        if (offerId) {
+            var offer = app.offers[offerId];
+            var previousOffer = app.currentOffer;
+            app.currentOffer = offer;
+            var event = this.jq.Event("offerchange");
+            event.previousOffer = previousOffer;
+            event.currentOffer = app.currentOffer;
+            this.jq(document).trigger(event);
+            this.updatePage(offer);
+        } else {
+            $('input[name=country]').val('');
+        }
+    },
+    
+    updatePage: function(offer) {
+        $('x-newprice').html(offer.price);
+        $('x-oldprice').html(offer.price2);
+        $('x-currency').html(offer.currency.name);
+        $('input[name=offer], select[name=offer]').val(offer.id);
+        $('input[name=country]').val(offer.country.code);
+    },
+
+    blockForm: function() {
+        // Блокируем кнопки при отправке формы
+        $('input[type=submit]', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        $('button', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        app.incompleteOrder.lock = true;
+        clearTimeout(app.incompleteOrder.timer);
+    },
+
+    unblockForm: function() {
+        $('input[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        $('button[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        app.incompleteOrder.lock = false;
+        clearTimeout(app.incompleteOrder.timer);
+    }
+
+};
+
+
+</script><script src="js/form.validate.js"></script>
+<script src="js/form.incomplete.js"></script>
+<script src="js/main2.js"></script>
+
+
+
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
+		<meta content="ie=edge" http-equiv="X-UA-Compatible">
+		<title>Calentras</title>
+		<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+		<link href="css/css2.css" rel="stylesheet">
+		<link href="css/bx.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+</head>
+	<body>
+		<img src="images/final-woman.png" style="display:none;">
+		<div class="overflow">
+			<header class="header">
+				<div class="wrapper">
+					<div class="logo">
+						<picture>
+							<source media="(max-width: 991px)" srcset="images/logo.png">
+							<img src="images/logo.png">
+						</picture>
+					</div>
+					<h4 class="header__title title"> ¿Te duelen las articulaciones o la espalda?</h4>
+					<p> ¡El gel Calentras es un remedio eficaz para la osteocondrosis, artrosis y lesiones!</p>
+				</div>
+			</header>
+			<section class="sec2">
+				<div class="wrapper">
+					<div class="sec2__prod">
+						<div class="sale">
+							<div> DESCUENTO<span> 50%</span></div>
+						</div>
+					</div>
+					<ul class="sec2__list">
+						<li class="sec2__item"> Alivia el dolor</li>
+						<li class="sec2__item"> Dispara el proceso de regeneración de los cartílagos</li>
+						<li class="sec2__item"> Elimina el hipertono muscular</li>
+						<li class="sec2__item"> Combate la hinchazón</li>
+						<li class="sec2__item"> Elimina la inflamación</li>
+					</ul>
+					<div class="sec2__prices prices">
+						<div class="prices__container">
+							<p> Anuncio publicitario<span> PRECIO DE DESCUENTO</span></p>
+							<div class="prices__new prices__item al-cost"><x-newprice>140</x-newprice> <x-currency>SOL</x-currency></div>
+							<div class="prices__old prices__item al-cost-promo"><x-oldprice>280</x-oldprice> <x-currency>SOL</x-currency></div>
+						</div>
+						<button class="button button--orange scroll"> PEDIR AHORA</button>
+					</div>
+				</div>
+			</section>
+			<section class="sec3">
+				<div class="wrapper">
+					<div class="sec3__text">
+						<p>
+							<i> Calentras</i> es un remedio que puede eliminar rápidamente el dolor por artrosis y osteocondrosis. Elimina el espasmo muscular y la inflamación. Calentras también es eficaz en el tratamiento de la osteocondrosis y artrosis porque desacelera el proceso de degeneración de tejido cartilaginoso y mejora su metabolismo, promoviendo la regeneración del cartílago articular.
+						</p>
+						<p> Puede verse un efecto positivo después de la primera aplicación. Si se usa regularmente detienen el avance de las enfermedades de las articulaciones y la columna.</p>
+						<button class="button button--purple pre_toform scroll"> Calentras está hecho exclusivamente con ingredientes naturales</button>
+					</div>
+				</div>
+			</section>
+			<section class="sec4">
+				<div class="wrapper">
+					<div class="test">
+						<div class="test__title"> Haz la siguiente encuesta para averiguar si necesitas Calentras o no:</div>
+						<ul>
+							<li class="question active">
+								<div class="question__title"> 1. Después de un largo día de trabajo, sientes pesadez y rigidez en las extremidades:</div>
+								<ul class="question__variants">
+									<li> Casi nunca</li>
+									<li> Muy a menudo</li>
+									<li> Siempre</li>
+								</ul>
+								<div class="question__button button button--next"> ADELANTE >>></div>
+							</li>
+							<li class="question">
+								<div class="question__title"> 2. ¿Ha tenido alguna lesión, esguince, contusión, fractura?</div>
+								<ul class="question__variants">
+									<li> Sí, tengo graves lesiones una vez cada par de años</li>
+									<li> Nada serio que requiera ir al hospital</li>
+									<li> Lesiones de poca importancia, a todos nos pasa</li>
+								</ul>
+								<div class="question__button button button--next"> ADELANTE >>></div>
+							</li>
+							<li class="question">
+								<div class="question__title"> 3. ¿Cuántos años tiene?</div>
+								<ul class="question__variants">
+									<li> Hasta 30</li>
+									<li> 30-45</li>
+									<li> 45+</li>
+								</ul>
+								<div class="question__button button button--next button--next--last"> ADELANTE >>></div>
+							</li>
+							<li class="question test__final"> Es imposible saber de antemano cuándo tendrá una lesión o una contusión, ¡pero es fácil curarlas lo más rápido posible! Prueba<span> Calentras</span> es un producto que te ayudará en cualquier situación, ya sea un esguince, una contusión o artrosis. La capacidad única de<span> Calentras</span> para aliviar el dolor y la inflamación te dará confianza en cualquier situación. El uso prolongado de esta crema te ayudará a deshacerte de viejas enfermedades y regenerar el tejido cartilaginoso.</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<section class="sec5">
+				<div class="wrapper"> Ventajas del gel Calentras para la espalda y articulaciones</div>
+			</section>
+			<section class="sec6">
+				<div class="wrapper">
+					<ul class="sec6__list">
+						<li class="sec6__item">
+							<div class="sec6__item-img"></div>
+							<div class="sec6__item-title"> UNA AMPLIA VARIEDAD DE ACCIONES</div>
+							<p> cura las enfermedades de las articulaciones, columna y relacionadas con la edad</p>
+						</li>
+						<li class="sec6__item">
+							<div class="sec6__item-img"></div>
+							<div class="sec6__item-title"> NO TIENE EFECTOS SECUNDARIOS</div>
+							<p> completamente seguro de usar una vez o regularmente</p>
+						</li>
+						<li class="sec6__item">
+							<div class="sec6__item-img"></div>
+							<div class="sec6__item-title"> COMPOSICIÓN 100% NATURAL</div>
+							<p> sólo componentes activos de plantas medicinales</p>
+						</li>
+						<li class="sec6__item">
+							<div class="sec6__item-img"></div>
+							<div class="sec6__item-title"> ALTA EFECTIVIDAD</div>
+							<p> que mejora el estado de salud y reduce el dolor después de la primera aplicación</p>
+						</li>
+						<li class="sec6__item">
+							<div class="sec6__item-img"></div>
+							<div class="sec6__item-title"> PROBADO POR EXPERTOS</div>
+							<p> el producto está certificado y satisface los estándares*</p>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="sec7">
+				<div class="wrapper">
+					<div class="sec7__title"> ¿Cómo usar Calentras?</div>
+					<ul class="sec7__list">
+						<li class="sec7__item">
+							<div class="sec7__img"></div>
+							<p> Aplicar en las áreas del cuerpo que experimentan tensión con ligeros movimientos de masajes hasta que se absorba por completo.</p>
+						</li>
+						<li class="sec7__item">
+							<div class="sec7__img"></div>
+							<p> 1 o 2 veces al día</p>
+						</li>
+						<li class="sec7__item">
+							<div class="sec7__img"></div>
+							<p> No enjuagar con agua durante la primera hora de aplicación</p>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="sec8">
+				<div class="wrapper">
+					<div class="sec8__block"> ¡Cuidado con las imitaciones!</div>
+					<div class="sec8__title"> ¿Cómo pedir el gel para la columna y articulaciones Calentras?</div>
+					<ul class="sec8__list">
+						<li class="sec8__item">
+							<div class="sec8__item-img"></div>
+							<p> Llenar el formulario</p>
+						</li>
+						<li class="sec8__item">
+							<div class="sec8__item-img"></div>
+							<p> Selecciona un método de envío</p>
+						</li>
+						<li class="sec8__item">
+							<div class="sec8__item-img"></div>
+							<p> Pago contra entrega</p>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<footer class="footer1">
+				<div class="wrapper">
+					<div class="footer__prod"></div>
+					<div class="footer__right">
+						<div class="sale sale--footer">
+							<div> DESCUENTO<span> 50%</span></div>
+						</div>
+						<div class="prices prices--footer">
+							<p> EL NÚMERO DE UNIDADES CON DESCUENTO ES LIMITADO</p>
+							<div class="prices__new prices__item al-cost"><x-newprice>140</x-newprice> <x-currency>SOL</x-currency></div>
+							<div class="prices__old prices__item al-cost-promo"><x-oldprice>280</x-oldprice> <x-currency>SOL</x-currency></div>
+						</div>
+						<form class="al-form" action="https://healthbestblog.space/cpatl/api.php" method="post">
+							   
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="PE" selected="selected" value="19809">
+            Перу        </option>
+    </select>
+
+    							<div class="form__row">
+								<div class="label">Nombre</div>
+								<div class="input-wrapper">
+									<input name="name" placeholder="Nombre" type="text" id="name">
+									<label for="name"></label>
+								</div>
+							</div>
+							<div class="form__row">
+								<div class="label">Teléfono</div>
+								<div class="input-wrapper">
+									<input class="only_number" name="phone" placeholder="Teléfono" type="tel" id="phone">
+									<label for="phone"></label>
+								</div>
+							</div>
+							<p class="mk-note" style="font-weight: bold; font-size: 26px;color:crimson;text-align: center;line-height: 1.3;font-family: inherit;padding: 0 10px;margin-bottom: 10px;">El precio de envío depende de la ciudad donde usted vive.</p>
+							<button class="button button--orange js_submit button__text" type="submit">ORDENAR</button>
+							   <input type="hidden" name="stream_hid" value="M8ztDaJ6">
+      <input type="hidden" name="offer_id" value="4916">
+
+      
+      <input type="hidden" name="country" value="PE"> 
+
+      <input type="hidden" name="sid1" value="alex">
+      <input type="hidden" name="sid2" value="alex2">
+      <input type="hidden" name="sid3" value="alex3">
+      <input type="hidden" name="redirect_url" value="https://amazinghealth.github.io/germitox-ita/success/index.html">
+						</form>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<center><p>OOO "OSTROV PRODAZH" OGRN: 1197746695530 VAT: 7708365555</p>
+<p>129090, Moscow, pereulok Zhivarev, house 8, stroenie 3, flat 16 email: ostrov.prodazh@mail.com Skype: ostrov.prodazh@mail.com</p> 
+
+
+    
+            <p class="conf-link doclinks">
+        <a class="nav-link" href="" onclick="window.open('/policy_en.php'); return false;">Privacy Policy</a>
+          |
+        <a class="nav-link" href="" onclick="window.open('/terms_en.php'); return false;">Terms & Conditions</a>
+      </p>
+      
+    
+</center>
+		<script src="js/jquery-1.12.4.min.js"></script>
+		<script src="js/bx.js"></script>
+		<script src="js/common.js"></script>
+	</body>
+</html>
